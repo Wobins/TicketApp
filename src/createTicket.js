@@ -20,9 +20,10 @@ const { email, title, description } = ticket
 // }
 
 
+
+
 function Display() {
     <React.Fragment>
-      <h1>{email}</h1>
-      <h2>{title}</h2>
+      <h1>{new_ticket}</h1>
     </React.Fragment>
 }
