@@ -62,17 +62,17 @@ class Ticket extends React.Component {
           </div>
           
           <div className="form-label-group mb-3">
-            <input onChange={ this.handleInputChange } name="email" value={this.state.email} type="email" id="user_email" className="form-control" placeholder="Email"/>
+            <input onChange={ this.handleInputChange } name="email" value={this.state.email} type="email" id="user_email" className="form-control" placeholder="Email" required/>
             <label htmlFor="user_email">Email</label>
           </div>
       
           <div className="form-label-group mb-3">
-            <input onChange={ this.handleInputChange } name="title" value={this.state.title}  type="text" id="ticket_title" className="form-control" placeholder="Title"/>
+            <input onChange={ this.handleInputChange } name="title" value={this.state.title}  type="text" id="ticket_title" className="form-control" placeholder="Title" required/>
             <label htmlFor="ticket_title">Title</label>
           </div>
 
           <div className="form-label-group mb-3">
-            <textarea onChange={ this.handleInputChange } name="description" value={this.state.description}  className="form-control" id="ticket_description" rows="3" placeholder="Description" ></textarea>
+            <textarea onChange={ this.handleInputChange } name="description" value={this.state.description}  className="form-control" id="ticket_description" rows="3" placeholder="Description" required></textarea>
             <label htmlFor="ticket_description">Description</label>
           </div>                       
       
