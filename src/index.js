@@ -3,7 +3,6 @@ import './index.css';
 import * as ReactDOM from 'react-dom/client';
 import PostTicket from './PostTicket';
 import Ticket from './Ticket';
-// import Reservation from './MyForm'
 import reportWebVitals from './reportWebVitals';
 
 
@@ -15,10 +14,6 @@ const allTickets = ReactDOM.createRoot(
   document.getElementById('allTickets')
 );
 
-const el = ReactDOM.createRoot(
-  document.getElementById('hi')
-);
-
 
 newTicket.render(
   <Ticket />
@@ -28,9 +23,6 @@ allTickets.render(
   <PostTicket />
 );
 
-// el.render(
-//   <Reservation />
-// );
 
 
 

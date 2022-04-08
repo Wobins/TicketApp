@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import './index.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const baseURL = "http://52.10.102.239/tickets/"
 
@@ -14,7 +16,7 @@ class Ticket extends React.Component {
   
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-      this.handleReset = this.handleSubmit.bind(this);
+      // this.handleReset = this.handleReset.bind(this);
     }
   
     handleInputChange(event) {
@@ -26,21 +28,6 @@ class Ticket extends React.Component {
         [name]: value
       });
     }
-
-    // handleReset(event) {
-    //   // this.setState({
-    //   //   email: "",
-    //   //   title: "",
-    //   //   description: ""
-    //   // });
-    //   const target = event.target;
-    //   const value = "";
-    //   const name = target.name;
-  
-    //   this.setState({
-    //     [name]: value
-    //   });
-    // }
   
     handleSubmit(event) {
       axios.post(baseURL, {
@@ -56,9 +43,9 @@ class Ticket extends React.Component {
 
     render() {
       return (
-        <form className="border border-dark p-3 mt-2" onSubmit={this.handleSubmit}>
+        <form className=" p-3 mt-3 shadow mb-5 rounded" onSubmit={this.handleSubmit}>
           <div className="text-center">
-            <h1>Create ticket</h1>
+            <h1 className="mb-4">Create ticket</h1>
           </div>
           
           <div className="form-label-group mb-3">
@@ -78,7 +65,7 @@ class Ticket extends React.Component {
       
           <div className="form-group row">
               <div className="col-6 text-center">
-                <button onReset={ this.handleReset } type="reset" className="btn btn-lg btn-warning btn-block">Reset</button>
+                <button onReset={ this.handleReset } type="reset" id="resetBtn" className="btn btn-lg btn-block">Reset</button>
               </div>
               <div className="col-6 text-center">
                 <button type="submit" className="btn btn-lg btn-block btn-primary create-ticket">Submit</button>

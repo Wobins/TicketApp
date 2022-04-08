@@ -5,6 +5,7 @@ import * as ReactDOM from 'react-dom/client';
 const baseURL = "http://52.10.102.239/tickets";
 
 const ressource = axios.get(baseURL);
+// const expression = "(e) => this.handleValidateTicket(ticket.id, e)";
 
 class PostTicket extends React.Component {
   // state = {
@@ -34,9 +35,7 @@ class PostTicket extends React.Component {
   }
 
   handleValidateTicket(id, event) {
-    axios.put(`${baseURL}/update/1${id}`, {
-      status: 1
-    }).then((response) => {
+    axios.put(`${baseURL}/update/${id}`).then((response) => {
       this.setState({tickets: this.deleteTicket(id)})
     });
   }
@@ -46,6 +45,20 @@ class PostTicket extends React.Component {
       return value.id != id;
     });
     return filtered
+  }
+
+  
+
+  checkStatus (validationStatus, el) {
+    if (validationStatus == 1) {
+      return (
+        <button type="button" onClick={(e) => this.handleValidateTicket(el, e)} className="btn btn-sm btn-success" disabled>Valider</button>
+      );
+    } else {
+      return (
+        <button type="button" onClick={(e) => this.handleValidateTicket(el, e)} className="btn btn-sm btn-success">Valider</button>
+      );
+    }
   }
 
 
@@ -62,7 +75,7 @@ class PostTicket extends React.Component {
                   <td>
                     <div className="row">
                       <div className="col-6 text-center">
-                        <button type="button" onClick={(e) => this.handleValidateTicket(ticket.id, e)} className="btn btn-sm btn-success">Valider</button>
+                        {this.checkStatus(ticket.status, ticket.id)}
                       </div>
                       <div className="col-6 text-center">
                         <button type="button" onClick={(e) => this.handleDeleteTicket(ticket.id, e)} className="btn btn-sm btn-danger">Supprimer</button>

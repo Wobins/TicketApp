@@ -1,57 +1,9 @@
-export default function MyForm() {
-  const [inputs, setInputs] = useState({});
-
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs(values => ({...values, [name]: value}))
+checkStatus (status) {
+    if (status == 1) {
+      return <button>Logout</button>;
+    } else {
+      return <button>Login</button>;
+    }
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert(inputs);
-  }
-
-  // Begin freecode camp
-  const [post, setPost] = React.useState(null);
-
-  function createPost() {
-    axios
-      .post(baseURL, {
-        title: "Hello World!",
-        body: "This is a new post."
-      })
-      .then((response) => {
-        setPost(response.data);
-      });
-  }
-
-  if (!post) return "No post!"
-  // End
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Enter your name:
-        <input 
-          type="text" 
-          name="username" 
-          value={inputs.username || ""} 
-          onChange={handleChange}
-        />
-        </label>
-      </div>
-      <div>
-        <label>Enter your age:
-          <input 
-            type="number" 
-            name="age" 
-            value={inputs.age || ""} 
-            onChange={handleChange}
-          />
-          </label>
-      </div>
-      <input type="submit" />
-    </form>
-  )
-}
+  <button type="button" onClick={(e) => this.handleValidateTicket(ticket.id, e)} className="btn btn-sm btn-success">Valider</button>
