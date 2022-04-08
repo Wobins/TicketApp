@@ -1,8 +1,9 @@
 import React from 'react';
 import './index.css';
 import * as ReactDOM from 'react-dom/client';
-import App from './App';
-import Ticket from './Ticket'
+import PostTicket from './PostTicket';
+import Ticket from './Ticket';
+// import Reservation from './MyForm'
 import reportWebVitals from './reportWebVitals';
 
 
@@ -24,11 +25,11 @@ newTicket.render(
 );
 
 allTickets.render(
-  <App />
+  <PostTicket />
 );
 
 // el.render(
-//   <App />
+//   <Reservation />
 // );
 
 

@@ -1,6 +1,7 @@
 import React from "react";
+import axios from "axios";
 
-const baseURL = "http://52.10.102.239/ticket/create"
+const baseURL = "http://52.10.102.239/tickets/"
 
 class Ticket extends React.Component {
     constructor(props) {
@@ -11,33 +12,48 @@ class Ticket extends React.Component {
         description: ""
       };
   
-      this.handleChange = this.handleChange.bind(this);
+      this.handleInputChange = this.handleInputChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleReset = this.handleSubmit.bind(this);
     }
   
-    handleChange(event) {
+    handleInputChange(event) {
+      const target = event.target;
+      const value = target.value;
+      const name = target.name;
+  
       this.setState({
-        email: event.target.value,
-        title: event.target.value,
-        description: event.target.value
+        [name]: value
       });
     }
 
-    handleReset(event) {
-      this.setState({
-        email: "",
-        title: "",
-        description: ""
-      });
-    }
+    // handleReset(event) {
+    //   // this.setState({
+    //   //   email: "",
+    //   //   title: "",
+    //   //   description: ""
+    //   // });
+    //   const target = event.target;
+    //   const value = "";
+    //   const name = target.name;
+  
+    //   this.setState({
+    //     [name]: value
+    //   });
+    // }
   
     handleSubmit(event) {
-      this.handleChange(event)
-      alert(`A name was submitted: ${this.props.email} ${this.state.title}`);
+      axios.post(baseURL, {
+        email: this.state.email,
+        title: this.state.title,
+        description: this.state.description
+      })
+      alert(`Veuillez confirmer!`);
+      window.location.reload()
       event.preventDefault();
     }
   
+
     render() {
       return (
         <form className="border border-dark p-3 mt-2" onSubmit={this.handleSubmit}>
@@ -46,17 +62,17 @@ class Ticket extends React.Component {
           </div>
           
           <div className="form-label-group mb-3">
-            <input onChange={ this.handleChange } type="email" id="user_email" className="form-control" placeholder="Email"/>
+            <input onChange={ this.handleInputChange } name="email" value={this.state.email} type="email" id="user_email" className="form-control" placeholder="Email"/>
             <label htmlFor="user_email">Email</label>
           </div>
       
           <div className="form-label-group mb-3">
-            <input onChange={ this.handleChange } type="text" id="ticket_title" className="form-control" placeholder="Title"/>
+            <input onChange={ this.handleInputChange } name="title" value={this.state.title}  type="text" id="ticket_title" className="form-control" placeholder="Title"/>
             <label htmlFor="ticket_title">Title</label>
           </div>
 
           <div className="form-label-group mb-3">
-            <textarea onChange={ this.handleChange } className="form-control" id="ticket_description" rows="3" placeholder="Description"></textarea>
+            <textarea onChange={ this.handleInputChange } name="description" value={this.state.description}  className="form-control" id="ticket_description" rows="3" placeholder="Description" ></textarea>
             <label htmlFor="ticket_description">Description</label>
           </div>                       
       
