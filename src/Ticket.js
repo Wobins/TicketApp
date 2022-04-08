@@ -1,6 +1,6 @@
 import React from "react";
-import ReactDOM from 'react-dom';
 
+const baseURL = "http://52.10.102.239/ticket/create"
 
 class Ticket extends React.Component {
     constructor(props) {
@@ -17,42 +17,55 @@ class Ticket extends React.Component {
     }
   
     handleChange(event) {
-      this.setState({value: event.target.value});
+      this.setState({
+        email: event.target.value,
+        title: event.target.value,
+        description: event.target.value
+      });
+    }
+
+    handleReset(event) {
+      this.setState({
+        email: "",
+        title: "",
+        description: ""
+      });
     }
   
     handleSubmit(event) {
-      alert('A name was submitted: ');
+      this.handleChange(event)
+      alert(`A name was submitted: ${this.props.email} ${this.state.title}`);
       event.preventDefault();
     }
   
     render() {
       return (
-        <form class="border border-dark p-3 mt-2" onSubmit={this.handleSubmit}>
-          <div class="text-center">
-              <h1>Create ticket</h1>
+        <form className="border border-dark p-3 mt-2" onSubmit={this.handleSubmit}>
+          <div className="text-center">
+            <h1>Create ticket</h1>
           </div>
           
-          <div class="form-label-group mb-3">
-              <input type="email" id="user_email" class="form-control" placeholder="Email"/>
-              <label for="user_email">Email</label>
+          <div className="form-label-group mb-3">
+            <input onChange={ this.handleChange } type="email" id="user_email" className="form-control" placeholder="Email"/>
+            <label htmlFor="user_email">Email</label>
           </div>
       
-          <div class="form-label-group mb-3">
-              <input type="text" id="ticket_title" class="form-control" placeholder="Title"/>
-              <label for="ticket_title">Title</label>
+          <div className="form-label-group mb-3">
+            <input onChange={ this.handleChange } type="text" id="ticket_title" className="form-control" placeholder="Title"/>
+            <label htmlFor="ticket_title">Title</label>
           </div>
 
-          <div class="form-label-group mb-3">
-              <textarea class="form-control" id="ticket_description" rows="3" placeholder="Description"></textarea>
-              <label for="ticket_description">Description</label>
+          <div className="form-label-group mb-3">
+            <textarea onChange={ this.handleChange } className="form-control" id="ticket_description" rows="3" placeholder="Description"></textarea>
+            <label htmlFor="ticket_description">Description</label>
           </div>                       
       
-          <div class="form-group row">
-              <div class="col-6 text-center">
-                <button onReset={ this.handleReset } type="reset" class="btn btn-lg btn-warning btn-block">Reset</button>
+          <div className="form-group row">
+              <div className="col-6 text-center">
+                <button onReset={ this.handleReset } type="reset" className="btn btn-lg btn-warning btn-block">Reset</button>
               </div>
-              <div class="col-6 text-center">
-                  <button onSubmit={ this.handleSubmit } type="submit" class="btn btn-lg btn-block btn-primary create-ticket">Submit</button>
+              <div className="col-6 text-center">
+                <button type="submit" className="btn btn-lg btn-block btn-primary create-ticket">Submit</button>
               </div>
           </div>
         </form>

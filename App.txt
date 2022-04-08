@@ -1,0 +1,69 @@
+function App() {
+  return (
+    <Suspense fallback={<h1>Loading profile...</h1>}>
+      <ProfileDetails />
+      <Suspense fallback={<h1>Loading posts...</h1>}>
+        <ProfileTimeline />
+      </Suspense>
+    </Suspense>
+  );
+}
+
+function ProfileDetails() {
+  // Try to read user info, although it might not have loaded yet
+  const status = ressource.status.read();
+  return <h1>{status}</h1>;
+}
+
+function ProfileTimeline() {
+  // Try to read posts, although they might not have loaded yet
+  const tickets = ressource.data.read();
+  return (
+    <ul>
+      {tickets.map(ticket => (
+        <li key={ticket.id}>{ticket.email}</li>
+      ))}
+    </ul>
+  );
+}
+
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children; 
+  }
+}
+
+async function App() {
+  const tickets = await axios.get("http://52.10.102.239/tickets/");
+    const t = Array.from(tickets.data);
+    console.log(t)
+  
+    return (
+      <React.Fragment>
+        <tr>
+          <td>{ t[0].email }</td>
+          <td>{ t[1].title }</td>
+        </tr>
+      </React.Fragment>
+    );
+}
+
+<ErrorBoundary>
+  <App />
+</ErrorBoundary>
