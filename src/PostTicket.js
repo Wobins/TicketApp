@@ -27,22 +27,25 @@ class PostTicket extends React.Component {
       })
   }
 
-  handleDeleteTicket(event) {
-    axios.put(`${baseURL}/delete/8`).then((response) => {
-      window.location.reload()
-      console.log(response.data);
-      window.location.reload()
+  handleDeleteTicket(id, event) {
+    axios.put(`${baseURL}/delete/${id}`).then((response) => {
+      this.setState({tickets: this.deleteTicket(id)})
     });    
   }
 
-  handleValidateTicket(event) {
-    axios.put(`${baseURL}/update/15`, {
+  handleValidateTicket(id, event) {
+    axios.put(`${baseURL}/update/1${id}`, {
       status: 1
     }).then((response) => {
-      window.location.reload()
-      console.log(response.data);
-      window.location.reload()
+      this.setState({tickets: this.deleteTicket(id)})
     });
+  }
+
+  deleteTicket(id) {
+    var filtered = this.state.tickets.filter(function(value, index, arr){ 
+      return value.id != id;
+    });
+    return filtered
   }
 
 
@@ -51,18 +54,18 @@ class PostTicket extends React.Component {
       this.state.tickets
             .map(ticket =>
               <React.Fragment>
-                <tr>
-                  <td key={ticket.id}>{ticket.id}</td>
-                  <td key={ticket.email}>{ticket.email}</td>
-                  <td key={ticket.title}>{ticket.title}</td>
-                  <td key={ticket.description}>{ticket.description}</td>
+                <tr key={ticket.id}>
+                  <td>{ticket.id}</td>
+                  <td>{ticket.email}</td>
+                  <td>{ticket.title}</td>
+                  <td>{ticket.description}</td>
                   <td>
                     <div className="row">
                       <div className="col-6 text-center">
-                        <button type="button" onClick={this.handleValidateTicket} className="btn btn-sm btn-success">Valider</button>
+                        <button type="button" onClick={(e) => this.handleValidateTicket(ticket.id, e)} className="btn btn-sm btn-success">Valider</button>
                       </div>
                       <div className="col-6 text-center">
-                        <button type="button" onClick={this.handleDeleteTicket} className="btn btn-sm btn-danger">Supprimer</button>
+                        <button type="button" onClick={(e) => this.handleDeleteTicket(ticket.id, e)} className="btn btn-sm btn-danger">Supprimer</button>
                       </div>
                     </div>
                   </td>
