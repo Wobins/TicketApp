@@ -64,12 +64,9 @@ class Ticket extends React.Component {
           </div>                       
       
           <div className="form-group row">
-              <div className="col-6 text-center">
-                <button onReset={ this.handleReset } type="reset" id="resetBtn" className="btn btn-lg btn-block">Reset</button>
-              </div>
-              <div className="col-6 text-center">
-                <button type="submit" className="btn btn-lg btn-block btn-primary create-ticket">Submit</button>
-              </div>
+            <div className="col-6 offset-6 text-center">
+              <button type="submit" className="btn btn-lg btn-block btn-primary create-ticket">Submit</button>
+            </div>
           </div>
         </form>
       );
